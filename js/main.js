@@ -16,12 +16,14 @@ closeModalRef.addEventListener("click", () => {
 closeOverlayRef.addEventListener("click", () => {
   closeModal();
 });
-window.addEventListener("keydown", (event) => {
+const duStuffOnKeydown = (event) => {
   if (event.code !== "Escape") {
     return;
   }
   closeModal();
-});
+  window.removeEventListener("keydown", duStuffOnKeydown);
+};
+window.addEventListener("keydown", duStuffOnKeydown);
 
 function createGallery(images) {
   return images
