@@ -16,14 +16,13 @@ closeModalRef.addEventListener("click", () => {
 closeOverlayRef.addEventListener("click", () => {
   closeModal();
 });
+
 const closeModalKeyboard = (event) => {
   if (event.code !== "Escape") {
     return;
   }
   closeModal();
-  window.removeEventListener("keydown", closeModalKeyboard);
 };
-window.addEventListener("keydown", closeModalKeyboard);
 
 function createGallery(images) {
   return images
@@ -64,9 +63,11 @@ function setOriginalImageSrc(url) {
 
 function openModal() {
   openModalRef.classList.add("is-open");
+  window.addEventListener("keydown", closeModalKeyboard);
 }
 
 function closeModal() {
+  window.removeEventListener("keydown", closeModalKeyboard);
   openModalRef.classList.remove("is-open");
   imgModalRef.src = "";
 }
